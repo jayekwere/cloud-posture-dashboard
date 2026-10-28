@@ -134,3 +134,9 @@ def test_packaged_samples_match_public_samples():
     for name in ["baseline", "previous", "current"]:
         packaged = SAMPLES.parent / "posture" / "data" / f"{name}.json"
         assert packaged.read_bytes() == (SAMPLES / f"{name}.json").read_bytes()
+
+
+def test_rfc3339_lowercase_designators():
+    raw = sample().to_dict()
+    raw["generated_at"] = "2026-10-28t09:00:00z"
+    assert parse_report(encode(raw)).generated_at == sample().generated_at

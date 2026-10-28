@@ -142,7 +142,7 @@ def parse_report(blob: bytes) -> Report:
             "Duplicate finding identity: id, account, resource and check_type "
             "must be unique together."
         )
-    generated = datetime.fromisoformat(data["generated_at"].replace("Z", "+00:00"))
+    generated = datetime.fromisoformat(data["generated_at"].upper().replace("Z", "+00:00"))
     if generated.utcoffset() is None:
         raise ReportError("$.generated_at must include a timezone.")
     return Report(data["report_id"], generated, data.get("source", "generic"), findings)
