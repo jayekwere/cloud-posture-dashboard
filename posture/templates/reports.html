@@ -1,7 +1,40 @@
-{% extends 'base.html' %}{% from 'macros.html' import icon %}
+{% extends "base.html" %}{% from 'macros.html' import icon %}
 {% block content %}<div class="page-heading"><div><div class="eyebrow">A FRESH PERSPECTIVE</div><h1>Bring your findings together.</h1><p>Upload JSON or explore the built-in synthetic snapshots.</p></div><span class="subtle-tag">NO CLOUD CREDENTIALS NEEDED</span></div>
-{% if error %}<div class="notice error" role="alert"><strong>We couldn't import that report.</strong><pre class="validation-error">{{ error }}</pre></div>{% endif %}
-<div class="upload-grid"><section class="card padded"><div class="upload-symbol">{{ icon('upload') }}</div><h2>Upload a findings report</h2><p>Generic findings 1.0 or the documented auditor bridge format. UTF-8 JSON only; maximum 1 MiB and 2,000 findings.</p><form action="{{ url_for('dashboard.reports') }}" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label class="file-picker" for="report-file"><span>Choose a JSON file</span><input id="report-file" type="file" name="report" accept="application/json,.json" required><small id="file-name">Nothing selected yet</small></label><button class="button primary" type="submit">{{ icon('upload') }}Import report</button></form><p class="fine-print">Uploaded names never become filesystem paths. Validated, normalized JSON is kept in an isolated temporary workspace.</p></section>
-<section class="card padded sample-panel"><span class="subtle-tag">SAFE TO EXPLORE</span><h2>A story told in three snapshots.</h2><p>All identifiers and evidence are made up. Follow the sample score from 51 → 71 → 82.</p><form action="{{ url_for('dashboard.load_sample') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label><span>Sample snapshot</span><select name="sample"><option value="current">October 28 · Current · 82 / 100</option><option value="previous">October 21 · Previous · 71 / 100</option><option value="baseline">October 14 · Baseline · 51 / 100</option></select></label><button class="button secondary" type="submit">Load sample {{ icon('arrow') }}</button></form><div class="inline-note">No credentials are read. Reports are temporary and isolated to this browser. Both accepted input contracts are included with the app.</div></section></div>
-<div class="section-heading"><div><h2>Loaded reports</h2><p>Newest first. Identical uploads are deduplicated; this workspace holds at most 20 reports.</p></div></div><section class="card table-scroll"><table><thead><tr><th>Report</th><th>Generated</th><th>Source</th><th>Findings</th><th></th></tr></thead><tbody>{% for snapshot in snapshots %}<tr><td><strong>{{ snapshot.report.report_id }}</strong></td><td>{{ snapshot.report.generated_at.strftime('%b %d, %Y · %H:%M %Z') }}</td><td>{{ snapshot.report.source }}</td><td>{{ snapshot.report.findings|length }}</td><td><a class="text-link" href="{{ url_for('dashboard.overview', report=snapshot.key) }}">Open {{ icon('arrow') }}</a></td></tr>{% else %}<tr><td colspan="5" class="empty-state">No reports loaded yet.</td></tr>{% endfor %}</tbody></table></section>
-<div class="reset-panel"><div><strong>Need a clean slate?</strong><p>Reset deletes this browser's uploaded snapshots and starts again with synthetic samples.</p></div><form action="{{ url_for('dashboard.reset') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button secondary small" type="submit" data-confirm="Delete this browser's temporary report workspace?">Reset workspace</button></form></div>{% endblock %}
+  {% if error %}<div class="notice error" role="alert"><strong>We couldn't import that report.</strong><pre class="validation-error">{{ error }}</pre></div>{% endif %}
+  <div class="upload-grid">
+    <section class="card padded">
+      <div class="upload-symbol">{{ icon("upload") }}</div>
+      <h2>Upload a findings report</h2>
+      <p>Generic findings 1.0 or the documented auditor bridge format. UTF-8 JSON only; maximum 1 MiB and 2,000 findings.</p>
+      <form action="{{ url_for('dashboard.reports') }}"
+            method="post"
+            enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label class="file-picker" for="report-file"><span>Choose a JSON file</span><input id="report-file"
+       type="file"
+       name="report"
+       accept="application/json,.json"
+       required><small id="file-name">Nothing selected yet</small></label><button class="button primary" type="submit">{{ icon("upload") }}Import report</button>
+      </form>
+      <p class="fine-print">Uploaded names never become filesystem paths. Validated, normalized JSON is kept in an isolated temporary workspace.</p>
+    </section>
+    <section class="card padded sample-panel">
+      <span class="subtle-tag">SAFE TO EXPLORE</span>
+      <h2>A story told in three snapshots.</h2>
+      <p>All identifiers and evidence are made up. Follow the sample score from 51 → 71 → 82.</p>
+      <form action="{{ url_for('dashboard.load_sample') }}" method="post">
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}"><label><span>Sample snapshot</span><select name="sample">
+          <option value="current">October 28 · Current · 82 / 100</option>
+          <option value="previous">October 21 · Previous · 71 / 100</option>
+          <option value="baseline">October 14 · Baseline · 51 / 100</option>
+        </select></label><button class="button secondary" type="submit">Load sample {{ icon("arrow") }}</button>
+      </form>
+      <div class="inline-note">No credentials are read. Reports are temporary and isolated to this browser. Both accepted input contracts are included with the app.</div>
+    </section>
+  </div>
+  <div class="section-heading"><div><h2>Loaded reports</h2><p>Newest first. Identical uploads are deduplicated; this workspace holds at most 20 reports.</p></div></div><section class="card table-scroll"><table><thead><tr><th>Report</th><th>Generated</th><th>Source</th><th>Findings</th><th></th></tr></thead><tbody>{% for snapshot in snapshots %}<tr><td><strong>{{ snapshot.report.report_id }}</strong></td><td>{{ snapshot.report.generated_at.strftime("%b %d, %Y · %H:%M %Z") }}</td><td>{{ snapshot.report.source }}</td><td>{{ snapshot.report.findings|length }}</td><td><a class="text-link"
+   href="{{ url_for('dashboard.overview', report=snapshot.key) }}">Open {{ icon("arrow") }}</a></td></tr>{% else %}<tr><td colspan="5" class="empty-state">No reports loaded yet.</td></tr>{% endfor %}</tbody></table></section>
+  <div class="reset-panel"><div><strong>Need a clean slate?</strong><p>Reset deletes this browser's uploaded snapshots and starts again with synthetic samples.</p></div><form action="{{ url_for('dashboard.reset') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button secondary small"
+        type="submit"
+        data-confirm="Delete this browser's temporary report workspace?">Reset workspace</button></form></div>{% endblock %}

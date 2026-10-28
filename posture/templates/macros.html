@@ -1,20 +1,54 @@
 {% macro icon(name, class='') -%}
-<svg class="icon {{ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-{% if name == 'overview' %}<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
-{% elif name == 'findings' %}<path d="M8 6h12M8 12h12M8 18h12M3 6h1M3 12h1M3 18h1"/>
-{% elif name == 'trends' %}<path d="M3 17l6-6 4 3 8-10M15 4h6v6M3 21h18"/>
-{% elif name == 'upload' %}<path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/>
-{% elif name == 'shield' %}<path d="M12 2l8 4v6c0 5-8 10-8 10S4 17 4 12V6l8-4Z"/><path d="m8 12 3 3 5-6"/>
-{% elif name == 'arrow' %}<path d="M5 12h14m-5-5 5 5-5 5"/>
-{% elif name == 'search' %}<circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>
-{% elif name == 'download' %}<path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/>
-{% else %}<path d="M6 3h9l4 4v14H6V3Z"/><path d="M14 3v5h5M9 12h7M9 16h7"/>{% endif %}
-</svg>
+  <svg class="icon {{ class }}"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.7"
+       aria-hidden="true">
+    {% if name == "overview" %}
+      <rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" />
+    {% elif name == "findings" %}
+      <path d="M8 6h12M8 12h12M8 18h12M3 6h1M3 12h1M3 18h1" />
+    {% elif name == "trends" %}
+      <path d="M3 17l6-6 4 3 8-10M15 4h6v6M3 21h18" />
+    {% elif name == "upload" %}
+      <path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5" />
+    {% elif name == "shield" %}
+      <path d="M12 2l8 4v6c0 5-8 10-8 10S4 17 4 12V6l8-4Z" />
+      <path d="m8 12 3 3 5-6" />
+    {% elif name == "arrow" %}
+      <path d="M5 12h14m-5-5 5 5-5 5" />
+    {% elif name == "search" %}
+      <circle cx="10" cy="10" r="6" />
+      <path d="m15 15 5 5" />
+    {% elif name == "download" %}
+      <path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4" />
+    {% else %}
+      <path d="M6 3h9l4 4v14H6V3Z" />
+      <path d="M14 3v5h5M9 12h7M9 16h7" />
+    {% endif %}
+  </svg>
 {%- endmacro %}
 {% macro badge(severity) -%}<span class="severity {{ severity }}"><span class="severity-dot"></span>{{ severity|capitalize }}</span>{%- endmacro %}
 {% macro finding_table(rows, report_key, empty='No findings match these filters.') -%}
-<div class="table-scroll"><table><thead><tr><th>Finding / resource</th><th>Severity</th><th>Check type</th><th>Account</th><th><span class="sr-only">Details</span></th></tr></thead><tbody>
-{% for index, f in rows %}<tr><td><a class="finding-link" href="{{ url_for('dashboard.detail', key=report_key, index=index) }}">{{ f.title }}</a><div class="resource-name">{{ f.resource }}</div></td><td>{{ badge(f.severity) }}</td><td><span class="check-name">{{ f.check_type }}</span></td><td><span class="account-name">{{ f.account }}</span></td><td><a class="detail-arrow" href="{{ url_for('dashboard.detail', key=report_key, index=index) }}" aria-label="Details: {{ f.title }}">{{ icon('arrow') }}</a></td></tr>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Finding / resource</th>
+          <th>Severity</th>
+          <th>Check type</th>
+          <th>Account</th>
+          <th><span class="sr-only">Details</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for index, f in rows %}<tr><td><a class="finding-link"
+   href="{{ url_for('dashboard.detail', key=report_key, index=index) }}">{{ f.title }}</a><div class="resource-name">{{ f.resource }}</div></td><td>{{ badge(f.severity) }}</td><td><span class="check-name">{{ f.check_type }}</span></td><td><span class="account-name">{{ f.account }}</span></td><td><a class="detail-arrow"
+   href="{{ url_for('dashboard.detail', key=report_key, index=index) }}"
+   aria-label="Details: {{ f.title }}">{{ icon("arrow") }}</a></td></tr>
 {% else %}<tr><td colspan="5" class="empty-state">{{ empty }}</td></tr>{% endfor %}
-</tbody></table></div>
+  </tbody>
+  </table>
+  </div>
 {%- endmacro %}

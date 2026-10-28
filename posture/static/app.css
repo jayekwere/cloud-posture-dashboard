@@ -1434,3 +1434,41 @@ input[type=search],select {
     scroll-behavior:auto!important;
   }
 }
+
+/* Keep secondary data readable at the default viewport. */
+:root { --muted: #647489; }
+.primary { background: #137d68; }
+table { font-size: 12px; }
+th { font-size: 11px; color: #697d90; }
+td { color: #566c80; }
+.resource-link, .finding-link { font-size: 12px; }
+.account-name { font-size: 10px; color: #5d7287; }
+.severity { font-size: 10px; }
+.severity.high { color: #925221; }
+.severity.medium { color: #81631b; }
+.severity.low { color: #37658b; }
+.severity.info { color: #546b83; }
+.resource-name, .check-name { font-size: 11px; color: #697f92; }
+.report-context { font-size: 11px; color: #6c7f91; }
+.card-label { font-size: 10px; }
+.severity-row, .severity-row strong { font-size: 11px; }
+.score-footnote { font-size: 10px; color: #6d8190; }
+.score-change, .score-change small { font-size: 10px; }
+.encouragement strong { font-size: 11px; }
+.streak-card p { font-size: 11px; color: #617d6c; }
+.streak-badge { font-size: 9px; color: #53775e; }
+.section-heading p { font-size: 11px; }
+.progress-card p, .text-link { font-size: 11px; }
+.formula summary, .formula p { font-size: 11px; color: #61798b; }
+.page-footer { font-size: 10px; color: #6f8396; }
+/* Let narrow form columns and scrolling tables shrink inside the viewport. */
+.app-shell, main, .card, .table-scroll { min-width: 0; }
+.table-scroll { max-width: 100%; }
+@media (max-width: 760px) {
+  .filter-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-panel label, .filter-panel select, .filter-panel input { min-width: 0; }
+  .section-heading { flex-wrap: wrap; }
+  .section-heading .button-row { flex-wrap: wrap; max-width: 100%; }
+}
+/* Visually hidden table labels must not inherit an offscreen column position. */
+.sr-only { left: 0; top: 0; }
