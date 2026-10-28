@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=80,<83"]
+requires = ["setuptools==84.2.1", "wheel==0.48.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,12 +13,13 @@ dependencies = [
   "Flask-WTF==1.3.0",
   "jsonschema[format-nongpl]==4.26.0",
   "gunicorn==26.2.0",
+  "typing-extensions==4.16.0",
 ]
 
 [project.optional-dependencies]
 dev = [
   "pytest==9.2.0", "pytest-cov==7.1.0", "ruff==0.17.3", "mypy==2.4.1",
-  "types-jsonschema==4.26.0.20261006",
+  "types-jsonschema==4.26.0.20261006", "setuptools==84.2.1", "wheel==0.48.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -29,7 +30,7 @@ posture = ["templates/*.html", "static/*", "schemas/*.json", "data/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=posture --cov-branch --cov-report=term-missing --cov-report=xml:artifacts/coverage.xml --cov-fail-under=85"
+addopts = "--cov=posture --cov-branch --cov-report=term-missing --cov-report=xml:artifacts/coverage.xml --cov-fail-under=85 --junitxml=artifacts/pytest.xml"
 
 [tool.coverage.run]
 branch = true

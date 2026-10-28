@@ -4,3 +4,5 @@
 !requirements.lock
 !pyproject.toml
 !LICENSE
+**/__pycache__/
+**/*.py[cod]
