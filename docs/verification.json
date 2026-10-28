@@ -1,0 +1,119 @@
+{
+  "recorded_at_utc": "2026-10-28T23:13:13.814387+00:00",
+  "scope": "Synthetic local inputs only; no cloud API calls or deployments.",
+  "python": "3.14.6",
+  "pytest": {
+    "passed": 56,
+    "failed": 0,
+    "errors": 0,
+    "coverage_combined_line_and_branch_percent": 98.5,
+    "minimum_coverage_percent": 85
+  },
+  "ruff": {
+    "version": "0.17.3",
+    "result": "passed"
+  },
+  "mypy": {
+    "version": "2.4.1",
+    "mode": "strict",
+    "result": "passed"
+  },
+  "actionlint": "passed both workflows",
+  "container": {
+    "recorded_at_utc": "2026-10-28T23:10:26.656596+00:00",
+    "image_id": "sha256:dacbec29e1ff45d9726d735f328ac0095cf31b26d519f039d516642689ebf9f1",
+    "platform": "linux",
+    "user": "10001:10001",
+    "checks": {
+      "health": true,
+      "non_root_readonly_caps_dropped": true,
+      "temporary_storage_works": true,
+      "populated_dashboard_and_headers": true,
+      "csrf_protected_upload": true,
+      "filtered_csv": true,
+      "missing_csrf_rejected": true
+    }
+  },
+  "trivy": {
+    "version": "0.76.1",
+    "image_id": "sha256:dacbec29e1ff45d9726d735f328ac0095cf31b26d519f039d516642689ebf9f1",
+    "artifact_id": "sha256:1d3819d991cd11ca1050528ee7a5a0a94b3045061316d881a59c1ca401c79e9b",
+    "os": {
+      "Family": "alpine",
+      "Name": "3.24.1"
+    },
+    "os_package_count": 30,
+    "python_package_count": 30,
+    "vulnerability_count_all_severities": 0,
+    "scan_sha256": "adb2cf5f2310c9814f85d02e3138559e6615addb6bf87a633e0ede3012d0b0df"
+  },
+  "browser": {
+    "recorded_at_utc": "2026-10-28T23:10:22.674690+00:00",
+    "desktop": {
+      "width": 1440,
+      "height": 1160
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    },
+    "checks": [
+      "populated overview and real screenshot",
+      "score formula disclosure",
+      "severity filter through real form",
+      "finding detail and evidence",
+      "new fixed and still-open trend groups",
+      "CSRF-protected file upload and local file-label script",
+      "actual filtered CSV download",
+      "zero browser errors and zero external requests",
+      "four mobile layouts without document overflow"
+    ],
+    "browser_errors": [],
+    "external_requests": [],
+    "screenshot_sha256": "8cb5f60c1bc6590a4dcaa384e88f951e5870aae36f0ef215b7e05a7329fb7a7b"
+  },
+  "source_sha256": {
+    ".dockerignore": "9354cfa8e3f01c5bd77b99ff883ca445d28873e53f3c7633a958dca99fac7e18",
+    ".github/workflows/ci.yml": "fdb30b5f0e68094471c8bcf7efaa732319ad1f2955e361e51237d3f267c94be5",
+    ".github/workflows/container.yml": "c33ae08ef6406f4257053edfa9038cd4900cebfa21e91ace1ff942cc4298d9ec",
+    "Dockerfile": "9eb49ed37e6fc2ac9e9f8a6c2f82abc120885ec55397fe0e17fbe5f626599587",
+    "Makefile": "30cc4961276742d13fe5de51461d37d2b820236a7dd68e8e7d1bd865e0ea2136",
+    "docker-compose.yml": "ab52ed615fd95db0326079d34ff9873dd44d79090fbed9e8e5e33063c8577e92",
+    "docs/dashboard.png": "8cb5f60c1bc6590a4dcaa384e88f951e5870aae36f0ef215b7e05a7329fb7a7b",
+    "posture/__init__.py": "d484484b2bbe669cea1bb048ce30e244123b149fe87b61f32d9e4992caf45f46",
+    "posture/analysis.py": "72df6110c9453399c804388c4b2d9cffffa1743ba500eed7afe6715f5b2dc0d5",
+    "posture/data/baseline.json": "2e142ef7270402d8a11cc51dad5a98aa2cdcd6d59c5f80367c23ab8bd2c59512",
+    "posture/data/current.json": "0f646a701846d77c40522172ac18c4c2a1fc1ba0d0df4744b17f8fc22cca8d0d",
+    "posture/data/previous.json": "5a25a1389bace4f56aa01a2ea4677d7d32a14e897652948addb9fa1cc5000631",
+    "posture/exporting.py": "5b8c1a83fc4db60214cd268850d755ccd215f37c40d558c7fdcda328384f639b",
+    "posture/filtering.py": "60be606aeafe90e8a48a1b83ebb2f9632c10241fe0849b02774f8fe00cb06af4",
+    "posture/models.py": "853299c29984aa47a3d3684959c259587adf3791897fb0a25d901682ac01da04",
+    "posture/parsing.py": "5a2913bf95195e88239a2f457c5cc12fb76277ac9c189ae41b9a5f27f704e2a3",
+    "posture/schemas/auditor.schema.json": "edb30f6c70f32ff65a7529324619d2ed773322ceac0f516647ab91d094693469",
+    "posture/schemas/findings.schema.json": "aa172100574edca4d0f114e6acfd0aaee5415fc4235b77e93a2382ac98e69468",
+    "posture/static/app.css": "e87057d57d7d46569c9e20bcc26bc3fbe49098d2bb47eda7dae13a6bcb7d27dc",
+    "posture/static/app.js": "b63a203e9c32a2f5558cf3e9b5f5e0c2d7c8d445a948a9afb6e0c6bded7d1286",
+    "posture/static/favicon.svg": "eff664c6c8736423c965fc1fd6f1b1ae94e69c78f61ed355f68281dc388d72bc",
+    "posture/storage.py": "27ba8a6d5f54358a86e9cb7dbfbfa9cde665ca684e53c761d23d8d871782f875",
+    "posture/templates/base.html": "fc63d4306af9499c247e4a672e7bdbea58aafea49ac1186d6634a61d8b90b9b4",
+    "posture/templates/detail.html": "e3a7ce7d9fc1925598da4092de9a7b83514e4294dcceb27040127e6bab403139",
+    "posture/templates/error.html": "482226019e3e21150dd078f8a3f8f1c1f55ec67d222df18aa803a8612da4b778",
+    "posture/templates/findings.html": "0d050f849f54eaa45092e341a9ba53df33581d9bee7e689ffe46496ab67be060",
+    "posture/templates/macros.html": "c44a246577a6285d0af5963f6cb873ec4173831331c962069359c1c8cc0bcc79",
+    "posture/templates/overview.html": "987e541ed988782c585c23f5aee4cd3210ee9b8cb7c4673c95d0ec62753b50b1",
+    "posture/templates/reports.html": "1f3f4a2835bd581e3cfd1cb14fae804fd881c6d9410fedc5aef71ee118d867c5",
+    "posture/templates/trends.html": "457df49068ebd6d906a183b2e21c756c1ebfa9e75df8cfbe0e9b434849da7a2b",
+    "posture/views.py": "a637179b10574569fbdc4e3eb1da4c7fb1707d72516c63d780b85a8d9f841ea2",
+    "pyproject.toml": "a05907762d465093f19f1f163a16bc467fb1dff214f33985bf67264bfe0f2b12",
+    "requirements-dev.lock": "d0dc786412c4eceb3d2c490f958a958afb08c8685e646139149baecddc9664b2",
+    "requirements.lock": "706a1df1eb93a9a7a93dcecd372c0f6f8baed251271977f54a1b19e5550e97ad",
+    "scripts/check_container.py": "7c1230d7101159a3552587ba70a87d941d3669d094223ba24bda66115abddb3b",
+    "scripts/check_image_scan.py": "7544fa70a6b7e983c23f2345a8007a414e969a4ccc1ea5634ae5a2919dbdd1a3",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/conftest.py": "8c8ee6a955932b73fc55a5f2b04957708ae43aac3640dea36c96e075ee27a28d",
+    "tests/test_domain.py": "efcc5cab63009da42f93a0fbc0bf39b5c4d8e99977de8f3782d6e4681a21538d",
+    "tests/test_image_gate.py": "5eed978886ef0741fac9dee2b9e6aa0bac4f1266020470d67c8f7863fea13e70",
+    "tests/test_storage.py": "14a684de59ce6fd3e8f0624f7acf85dbb9f16173343fa04e98924ef4d128cdcf",
+    "tests/test_web.py": "d43d01ec05dea002b4ce997cfa281c35ca1172a98d98e7a3b17790a419326036"
+  }
+}
