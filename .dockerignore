@@ -1,0 +1,6 @@
+*
+!posture/
+!posture/**
+!requirements.lock
+!pyproject.toml
+!LICENSE
