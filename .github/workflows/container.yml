@@ -1,0 +1,55 @@
+name: Image security
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: image-${{ github.ref }}
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+jobs:
+  container:
+    name: Container and Trivy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Build the non-root image
+        run: docker build --tag "cloud-posture-dashboard:${GITHUB_SHA}" .
+      - name: Verify runtime restrictions and HTTP behavior
+        run: python3 scripts/check_container.py --image "cloud-posture-dashboard:${GITHUB_SHA}"
+      - name: Install checksum-verified Trivy 0.76.1
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/posture-trivy"
+          curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+            https://github.com/aquasecurity/trivy/releases/download/v0.76.1/trivy_0.76.1_Linux-64bit.tar.gz \
+            --output "$RUNNER_TEMP/posture-trivy/trivy.tar.gz"
+          echo 'c7cbe3137fb8a48a17574bede3dd6beb16742d1e9772929940fc90082c39d9c0  trivy.tar.gz' | \
+            (cd "$RUNNER_TEMP/posture-trivy" && sha256sum --check -)
+          tar -xzf "$RUNNER_TEMP/posture-trivy/trivy.tar.gz" -C "$RUNNER_TEMP/posture-trivy" trivy
+      - name: Scan OS and Python packages; block every high/critical finding
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/posture-trivy/trivy" image --scanners vuln --format json \
+            --ignorefile /dev/null --pkg-types os,library --output artifacts/trivy.json "cloud-posture-dashboard:${GITHUB_SHA}"
+          python3 scripts/check_image_scan.py artifacts/trivy.json
+      - name: Record source and image identity
+        if: always()
+        run: |
+          mkdir -p artifacts
+          git rev-parse HEAD > artifacts/source-commit.txt
+          docker image inspect "cloud-posture-dashboard:${GITHUB_SHA}" --format '{{.Id}}' > artifacts/image-id.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: container-${{ github.sha }}
+          path: artifacts/
+          retention-days: 14
