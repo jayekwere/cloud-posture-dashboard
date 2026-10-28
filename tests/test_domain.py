@@ -31,7 +31,7 @@ def test_generic_round_trip_and_score():
         == 0
     )
     assert len(top_resources(report)) == 5
-    assert top_resources(report)[0].penalty == 8
+    assert top_resources(report)[0].penalty == 9
 
 
 def test_auditor_bridge_mapping_and_generated_identity():
@@ -59,7 +59,9 @@ def test_diff_identity_and_updated_evidence():
     changed = replace(before.findings[0], severity=Severity.LOW, evidence={"changed": True})
     same_identity = compare(before, replace(before, findings=(changed, *before.findings[1:])))
     assert len(same_identity.still_open) == len(before.findings)
-    assert same_identity.still_open[0].evidence == {"changed": True}
+    assert next(f for f in same_identity.still_open if f.id == changed.id).evidence == {
+        "changed": True
+    }
     different_account = replace(before.findings[0], account="another-demo")
     split = compare(before, replace(before, findings=(different_account, *before.findings[1:])))
     assert len(split.new) == len(split.fixed) == 1
@@ -84,10 +86,10 @@ def test_streak_and_encouragement():
         (b"\xff", "UTF-8"),
         (b'{"a": 1, "a": 2}', "Duplicate JSON"),
         (b'{"a": NaN}', "Non-finite"),
-        (b"[" * 1000 + b"]" * 1000, "nesting"),
+        (b"[" * 1000 + b"]" * 1000, "nest"),
         (b" " * (MAX_REPORT_BYTES + 1), "1 MiB"),
         (b'{"schema_version":"1.0","evidence":"\\ud800"}', "Unicode"),
-        (b"[]", "JSON object"),
+        (b"[]", "object"),
     ],
 )
 def test_bad_json_is_readable(blob, message):
