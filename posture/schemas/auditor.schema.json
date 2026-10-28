@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Documented auditor bridge input (upstream compatibility unverified)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generated_at",
+    "findings"
+  ],
+  "properties": {
+    "tool": {
+      "const": "iam-least-privilege-auditor"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "report_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 40
+    },
+    "summary": {
+      "type": "object"
+    },
+    "findings": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "check_id",
+          "account_id",
+          "severity"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "resource_arn"
+            ]
+          },
+          {
+            "required": [
+              "principal_arn"
+            ]
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "check_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "account_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "resource_arn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "principal_arn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "remediation": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "recommendation": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "evidence": {},
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INFO",
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "info"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

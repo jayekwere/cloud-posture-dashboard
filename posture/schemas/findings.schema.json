@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cloud Posture Findings 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "report_id",
+    "generated_at",
+    "findings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "report_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 40
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "findings": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "$ref": "#/$defs/finding"
+      }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "check_type",
+        "account",
+        "resource",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "check_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "account": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "info"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "remediation": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "evidence": {}
+      }
+    }
+  }
+}

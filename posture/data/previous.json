@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sample-2026-10-21",
+  "generated_at": "2026-10-21T09:00:00Z",
+  "source": "synthetic-demo",
+  "findings": [
+    {
+      "id": "demo-001",
+      "severity": "high",
+      "check_type": "wildcard-actions",
+      "account": "demo-east",
+      "resource": "deploy-reader",
+      "title": "Role allows wildcard read actions",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "wildcard-actions",
+        "observed": "demonstration value",
+        "resource": "deploy-reader"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-002",
+      "severity": "medium",
+      "check_type": "unused-permissions",
+      "account": "demo-west",
+      "resource": "artifact-sync",
+      "title": "Role retains unused write permissions",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "unused-permissions",
+        "observed": "demonstration value",
+        "resource": "artifact-sync"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-003",
+      "severity": "medium",
+      "check_type": "stale-key",
+      "account": "demo-lab",
+      "resource": "automation-key",
+      "title": "Access key needs rotation",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "stale-key",
+        "observed": "demonstration value",
+        "resource": "automation-key"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-004",
+      "severity": "low",
+      "check_type": "unscoped-trust",
+      "account": "demo-east",
+      "resource": "deploy-reader",
+      "title": "Trust policy needs an external boundary",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "unscoped-trust",
+        "observed": "demonstration value",
+        "resource": "deploy-reader"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-005",
+      "severity": "low",
+      "check_type": "missing-condition",
+      "account": "demo-west",
+      "resource": "backup-reader",
+      "title": "Policy lacks a source condition",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "missing-condition",
+        "observed": "demonstration value",
+        "resource": "backup-reader"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-006",
+      "severity": "low",
+      "check_type": "unused-role",
+      "account": "demo-lab",
+      "resource": "retired-runner",
+      "title": "Dormant role can be removed",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "unused-role",
+        "observed": "demonstration value",
+        "resource": "retired-runner"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-007",
+      "severity": "low",
+      "check_type": "policy-hygiene",
+      "account": "demo-east",
+      "resource": "audit-reader",
+      "title": "Policy statement can be simplified",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "policy-hygiene",
+        "observed": "demonstration value",
+        "resource": "audit-reader"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "demo-008",
+      "severity": "info",
+      "check_type": "inventory-note",
+      "account": "demo-west",
+      "resource": "sandbox-bucket",
+      "title": "Inventory coverage recorded",
+      "description": "Synthetic finding for exploring posture changes. No cloud account was queried.",
+      "evidence": {
+        "synthetic": true,
+        "rule": "inventory-note",
+        "observed": "demonstration value",
+        "resource": "sandbox-bucket"
+      },
+      "remediation": "Review the demonstrated statement, replace broad permissions with explicit actions and resource scopes, and verify the intended access."
+    },
+    {
+      "id": "resolved-wildcard",
+      "severity": "high",
+      "check_type": "wildcard-resources",
+      "account": "demo-east",
+      "resource": "archive-export",
+      "title": "Legacy export role has broad resource access",
+      "description": "Synthetic historical finding.",
+      "evidence": {
+        "synthetic": true
+      },
+      "remediation": "Scope the role to the intended object prefix."
+    },
+    {
+      "id": "resolved-medium",
+      "severity": "medium",
+      "check_type": "stale-role",
+      "account": "demo-west",
+      "resource": "legacy-task",
+      "title": "Stale task role remains active",
+      "evidence": {
+        "synthetic": true
+      },
+      "remediation": "Remove the unused synthetic role."
+    }
+  ]
+}

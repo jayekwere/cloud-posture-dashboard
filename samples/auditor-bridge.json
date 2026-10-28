@@ -1,0 +1,22 @@
+{
+  "tool": "iam-least-privilege-auditor",
+  "version": "bridge-example",
+  "report_id": "synthetic-auditor-bridge",
+  "generated_at": "2026-10-28T08:00:00Z",
+  "findings": [
+    {
+      "check_id": "IAM-WILDCARD",
+      "account_id": "demo-auditor",
+      "principal_arn": "demo:identity:role/example-reader",
+      "severity": "HIGH",
+      "title": "Example reader uses a wildcard",
+      "evidence": {
+        "synthetic": true,
+        "actions": [
+          "demo:Read*"
+        ]
+      },
+      "recommendation": "Replace the wildcard with explicit read actions."
+    }
+  ]
+}
