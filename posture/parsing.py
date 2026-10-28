@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections.abc import Iterable
 from datetime import datetime
 from pathlib import Path
@@ -42,6 +43,8 @@ def _bound_structure(value: Any) -> None:
         count += 1
         if depth > 20 or count > 40_000:
             raise ReportError("Report is too deeply nested or contains too many JSON values.")
+        if isinstance(node, float) and not math.isfinite(node):
+            raise ReportError("JSON number exceeds the finite numeric range.")
         if isinstance(node, str):
             try:
                 node.encode("utf-8")
@@ -71,7 +74,7 @@ def _validate(value: Any, schema_name: str) -> dict[str, Any]:
 
 
 def _adapt_auditor(value: Any) -> dict[str, Any]:
-    """Documented bridge contract; upstream format has not yet been accessible."""
+    """Explicit bridge contract; no upstream implementation is required."""
     raw = _validate(value, "auditor.schema.json")
     findings = []
     for item in raw["findings"]:

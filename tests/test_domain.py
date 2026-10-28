@@ -86,6 +86,7 @@ def test_streak_and_encouragement():
         (b"\xff", "UTF-8"),
         (b'{"a": 1, "a": 2}', "Duplicate JSON"),
         (b'{"a": NaN}', "Non-finite"),
+        (b'{"a": 1e999}', "finite numeric"),
         (b"[" * 1000 + b"]" * 1000, "nest"),
         (b" " * (MAX_REPORT_BYTES + 1), "1 MiB"),
         (b'{"schema_version":"1.0","evidence":"\\ud800"}', "Unicode"),
