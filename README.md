@@ -136,3 +136,7 @@ Tests cover parsing, schema errors and limits, scoring, ranking, identity-based 
 Sample files live in [`samples/`](samples); matching packaged copies are checked by tests so local and container demos stay consistent. Runtime dependencies are hash-locked in `requirements.lock`, and development/build tooling in `requirements-dev.lock`. Python 3.12/3.14 CI verifies the install path. To update dependencies deliberately, use a current isolated pip-tools installation to regenerate the lockfiles with hashes, then rerun all checks and rebuild/scan the image.
 
 License: [MIT](LICENSE).
+
+---
+
+**AI assistance:** AI tools helped with code or documentation.
